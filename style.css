@@ -1,0 +1,23 @@
+.heading{
+    text-align: center;
+    font-family: 'Fuzzy Bubbles', cursive;
+    width: 100%;
+    line-height: 3;
+    font-size: 30px;
+}
+
+#ins{
+    float: right;
+    height: 90px;
+    width: 300px;
+    font-size: 30px;
+    line-height: 3;
+}
+
+#start{
+    font-size: 20px;
+}
+
+#status{
+    font-size: 20px;
+}
