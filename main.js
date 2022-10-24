@@ -1,4 +1,7 @@
 /*created by prashant shukla */
+noseX = 0;
+noseY = 0;
+var score = 0;
 
 var paddle2 = 10,
   paddle1 = 10;
@@ -23,15 +26,45 @@ var ball = {
   dx: 3,
   dy: 3
 }
+game_status = "";
 
 function setup() {
   var canvas = createCanvas(700, 600);
   canvas.parent('canvas');
+  video = createCapture(VIDEO);
+  video.size(700, 600);
+  video.hide()
+  pose = ml5.poseNet(video, modelLoaded);
+  pose.on("pose", gotPoses);
 }
 
+function gotPoses(results) {
+  if(results.length > 0){
+    console.log(results);
+    noseX = results[0].pose.rightWrist.x;
+    noseY = results[0].pose.rightWrist.y;
+    score = results[0].pose.rightWrist.score;
+  }
+}
+
+function modelLoaded() {
+  console.log("Model Loaded!")
+}
+
+function startGame() {
+  game_status = "start";
+  document.getElementById("status").innerHTML = "Game is Loaded!";
+}
 
 function draw() {
+  if (score > 0.2) {
+    fill("#FFFFFF");
+    stroke("#FFFFFF");
+    circle(noseX,noseY,2)
+  }
 
+  image(video, 0, 0, 700, 600);
+  if(game_status == "start");
   background(0);
 
   fill("black");
